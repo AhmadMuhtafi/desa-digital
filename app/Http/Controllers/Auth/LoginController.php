@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Http\Controllers\Auth;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
+
+class LoginController extends Controller
+{
+    /** Batas percobaan login sebelum dikunci sementara. */
+    private const MAX_ATTEMPTS = 5;
+
+    public function index(): View
+    {
+        return view('auth.login');
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $credentials = $request->validate([
+            'username' => ['required', 'string'],
+            'password' => ['required', 'string'],
+        ], [
+            'username.required' => 'Username wajib diisi.',
+            'password.required' => 'Kata sandi wajib diisi.',
+        ]);
+
+        $throttleKey = Str::transliterate(
+            Str::lower($credentials['username']) . '|' . $request->ip()
+        );
+
+        if (RateLimiter::tooManyAttempts(
+            $throttleKey,
+            self::MAX_ATTEMPTS
+        )) {
+            $seconds = RateLimiter::availableIn($throttleKey);
+
+            throw ValidationException::withMessages([
+                'username' => "Terlalu banyak percobaan login. Coba lagi dalam {$seconds} detik.",
+            ]);
+        }
+
+        if (! Auth::attempt([
+            'username' => $credentials['username'],
+            'password' => $credentials['password'],
+            'is_active' => true,
+        ], $request->boolean('remember'))) {
+
+            RateLimiter::hit($throttleKey);
+
+            throw ValidationException::withMessages([
+                'username' => 'Username atau kata sandi salah.',
+            ]);
+        }
+
+        RateLimiter::clear($throttleKey);
+
+        $request->session()->regenerate();
+
+        return redirect()->intended(
+            route('admin.dashboard')
+        );
+    }
+
+    public function destroy(Request $request): RedirectResponse
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()
+            ->route('login')
+            ->with('status', 'Anda telah keluar.');
+    }
+}

@@ -1,0 +1,330 @@
+/* =========================================================
+   Halaman autentikasi (login)
+   Letakkan di: public/assets/admin/css/auth.css
+   Memakai variabel warna dari admin.css
+   ========================================================= */
+
+.auth {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+}
+
+/* ---------- Panel kiri ---------- */
+.auth-aside {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 48px 56px;
+    color: #fff;
+    background: linear-gradient(135deg, #4338ca 0%, #6d28d9 55%, #7c3aed 100%);
+}
+
+.auth-aside::before,
+.auth-aside::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .08);
+    pointer-events: none;
+}
+
+.auth-aside::before {
+    width: 420px;
+    height: 420px;
+    right: -140px;
+    top: -120px;
+}
+
+.auth-aside::after {
+    width: 320px;
+    height: 320px;
+    left: -100px;
+    bottom: -110px;
+}
+
+.auth-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-brand .brand-logo {
+    background: rgba(255, 255, 255, .18);
+    backdrop-filter: blur(4px);
+}
+
+.auth-brand .brand-name {
+    font-size: 18px;
+}
+
+.auth-hero {
+    position: relative;
+    z-index: 1;
+    max-width: 460px;
+}
+
+.auth-hero h2 {
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -.03em;
+    margin-bottom: 14px;
+}
+
+.auth-hero p {
+    font-size: 15px;
+    opacity: .85;
+    margin-bottom: 28px;
+}
+
+.auth-points {
+    display: grid;
+    gap: 14px;
+}
+
+.auth-points li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+}
+
+.auth-points i {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, .16);
+    font-size: 15px;
+}
+
+.auth-copy {
+    position: relative;
+    z-index: 1;
+    font-size: 13px;
+    opacity: .7;
+}
+
+/* ---------- Panel form ---------- */
+.auth-main {
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: 40px 24px;
+    background: var(--bg);
+}
+
+.auth-theme {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-card .mobile-brand {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.auth-card h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -.03em;
+}
+
+.auth-card .lead {
+    color: var(--muted);
+    margin: 6px 0 28px;
+}
+
+.alert {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    margin-bottom: 20px;
+}
+
+.alert i {
+    margin-top: 2px;
+}
+
+.alert-danger {
+    background: var(--danger-soft);
+    color: var(--danger);
+}
+
+.alert-success {
+    background: var(--success-soft);
+    color: var(--success);
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.field label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+
+.input-wrap {
+    position: relative;
+}
+
+.input-wrap>i.lead-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    pointer-events: none;
+}
+
+.input {
+    width: 100%;
+    height: 46px;
+    padding: 0 44px 0 42px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+}
+
+.input::placeholder {
+    color: var(--muted);
+}
+
+.input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px var(--primary-soft);
+}
+
+.input.is-invalid {
+    border-color: var(--danger);
+}
+
+.input.is-invalid:focus {
+    box-shadow: 0 0 0 4px var(--danger-soft);
+}
+
+.field-error {
+    color: var(--danger);
+    font-size: 12.5px;
+    margin-top: 6px;
+}
+
+.toggle-pass {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+}
+
+.toggle-pass:hover {
+    background: var(--surface-2);
+    color: var(--text);
+}
+
+.auth-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0 22px;
+    font-size: 13.5px;
+}
+
+.check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: var(--text-2);
+}
+
+.check input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary);
+}
+
+.auth-row a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.auth-row a:hover {
+    text-decoration: underline;
+}
+
+.btn-block {
+    width: 100%;
+    height: 46px;
+    font-size: 15px;
+}
+
+.btn[disabled] {
+    opacity: .75;
+    cursor: progress;
+    transform: none;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, .45);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin .7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.auth-foot {
+    margin-top: 28px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* ---------- Responsif ---------- */
+@media (max-width: 900px) {
+    .auth {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-aside {
+        display: none;
+    }
+
+    .auth-card .mobile-brand {
+        display: flex;
+    }
+}
