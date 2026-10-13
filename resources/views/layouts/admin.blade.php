@@ -49,34 +49,45 @@
                     <i class="bi bi-person-gear"></i>
                     <span>Pengguna &amp; Peran</span>
                 </a>
+
+                <a href="{{ route('admin.menu.index') }}"
+                class="nav-link {{ request()->routeIs('admin.menu.*') ? 'active' : '' }}"
+                data-tip="Menu Website">
+                    <i class="bi bi-list-nested"></i>
+                    <span>Menu Website</span>
+                </a>
             @endif
 
-            <a href="#" class="nav-link" data-tip="Produk">
-                <i class="bi bi-box-seam"></i>
-                <span>Produk</span>
+            <a
+                href="{{ route('admin.kategori.index') }}"
+                class="nav-link {{ request()->routeIs('admin.kategori.*') ? 'active' : '' }}"
+                data-tip="Kategori"
+            >
+                <i class="bi bi-tags"></i>
+                <span>Kategori</span>
             </a>
-
-            <a href="#" class="nav-link" data-tip="Pelanggan">
-                <i class="bi bi-people"></i>
-                <span>Pelanggan</span>
-            </a>
-
-            <a href="#" class="nav-link" data-tip="Laporan">
-                <i class="bi bi-bar-chart-line"></i>
-                <span>Laporan</span>
-            </a>
-
 
             <div class="nav-label">Pengaturan</div>
-
-            <a href="#" class="nav-link" data-tip="Pengaturan">
-                <i class="bi bi-gear"></i>
-                <span>Pengaturan</span>
+             
+            <a href="{{ route('admin.profil-desa.index') }}"
+            class="nav-link {{ request()->routeIs('admin.profil-desa.*') ? 'active' : '' }}"
+            data-tip="Profil Desa">
+                <i class="bi bi-buildings"></i>
+                <span>Profil Desa</span>
             </a>
 
-            <a href="#" class="nav-link" data-tip="Bantuan">
-                <i class="bi bi-question-circle"></i>
-                <span>Bantuan</span>
+            <a href="{{ route('admin.kontak-desa.index') }}"
+            class="nav-link {{ request()->routeIs('admin.kontak-desa.*') ? 'active' : '' }}"
+            data-tip="Kontak Desa">
+                <i class="bi bi-telephone"></i>
+                <span>Kontak Desa</span>
+            </a>
+
+            <a href="{{ route('admin.pengaturan.index') }}"
+                class="nav-link {{ request()->routeIs('admin.pengaturan.*') ? 'active' : '' }}"
+                data-tip="Pengaturan">
+                <i class="bi bi-gear"></i>
+                <span>Pengaturan</span>
             </a>
         </nav>
 
