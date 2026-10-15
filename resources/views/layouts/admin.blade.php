@@ -56,7 +56,30 @@
                     <i class="bi bi-list-nested"></i>
                     <span>Menu Website</span>
                 </a>
+
+                <a
+                    href="{{ route('admin.berita.index') }}"
+                    class="nav-link {{ request()->routeIs('admin.berita.*') ? 'active' : '' }}"
+                    data-tip="Berita & Artikel"
+                >
+                    <i class="bi bi-newspaper"></i>
+                    <span>Berita</span>
+                </a>
             @endif
+            
+            <a href="{{ route('admin.dokumen.index') }}"
+            class="nav-link {{ request()->routeIs('admin.dokumen.*') ? 'active' : '' }}"
+            data-tip="Dokumen">
+                <i class="bi bi-file-earmark-text"></i>
+                <span>Dokumen</span>
+            </a>
+
+            <a href="{{ route('admin.galeri-album.index') }}"
+               class="nav-link {{ request()->routeIs('admin.galeri-album.*') ? 'active' : '' }}"
+               data-tip="Galeri Album">
+                <i class="bi bi-images"></i>
+                <span>Galeri Album</span>
+            </a>
 
             <a
                 href="{{ route('admin.kategori.index') }}"

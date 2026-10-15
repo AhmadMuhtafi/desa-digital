@@ -9,6 +9,9 @@ use App\Http\Controllers\Admin\ProfilDesaController;
 use App\Http\Controllers\Admin\KontakDesaController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\Admin\BeritaController;
+use App\Http\Controllers\Admin\DokumenController;
+use App\Http\Controllers\Admin\GaleriAlbumController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -64,6 +67,20 @@ Route::middleware(['auth'])
 
         Route::resource('kategori', KategoriController::class)
             ->except(['show']);
+
+        Route::resource('berita', BeritaController::class)
+            ->parameters(['berita' => 'berita'])
+            ->middleware('admin');
+        
+        Route::resource('dokumen', DokumenController::class)
+            ->parameters(['dokumen' => 'dokumen'])
+            ->except(['show'])
+            ->middleware('admin');
+        
+        Route::resource('galeri-album', GaleriAlbumController::class)
+            ->parameters(['galeri-album' => 'galeriAlbum'])
+            ->except(['show'])
+            ->middleware('admin');
 
         Route::resource('users', UserController::class)
             ->middleware('admin');
